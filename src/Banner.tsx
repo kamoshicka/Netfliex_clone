@@ -41,8 +41,6 @@ return (
   className="Banner"
   style={{
     backgroundSize: "cover",
-    // position:"absolute",
-    // objectFit: "contain",
     width: "100%", 
     height:"50vw",
     backgroundRepeat: "no-repeat",

@@ -52,15 +52,34 @@ const handleClick = async (movie: Movie) => {
   if (trailerUrl) {
     setTrailerUrl("");
   } else {
-    let trailerurl = await axios.get(
-      `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=59947a01dedfacaaeb60096d5ae1e04a`
-    );
-    if (trailerurl.data.results.length > 0) {
-      setTrailerUrl(trailerurl.data.results[0].key);
-    } else {
-      setTrailerUrl(""); // 適切なトレーラーがない場合はリセット
-    }}
+    try {
+      // TV番組（name）か映画（title）かを判定
+      const type = movie.name ? "tv" : "movie";
+
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/${type}/${movie.id}/videos?api_key=59947a01dedfacaaeb60096d5ae1e04a`
+      );
+
+      const results = response.data.results;
+
+      const trailer = results.find(
+        (video: any) => video.site === "YouTube" && video.type === "Trailer"
+      );
+
+      if (trailer) {
+        setTrailerUrl(trailer.key);
+      } else {
+        console.warn("トレーラーが見つかりませんでした");
+        setTrailerUrl("");
+      }
+    } catch (error) {
+      console.error("トレーラー取得エラー", error);
+      setTrailerUrl("");
+    }
+  }
 };
+
+
 
 return (
   <div className="Row">
