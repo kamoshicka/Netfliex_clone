@@ -61,5 +61,5 @@ return (
   <h1 className='Banner-description'>{truncate(movie?.overview, 150)}</h1>
 </div>
 <div className='Banner-fadeBottom' />
-</header>
+</header> 
 );};
