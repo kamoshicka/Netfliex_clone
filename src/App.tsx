@@ -5,7 +5,7 @@ import {Banner} from "./Banner";
 import {Nav} from "./Nav";
 
 function App() {
-  const apiBaseURL = "https://api.themoviedb.org/3/";
+  // const apiBaseURL = "https://api.themoviedb.org/3/";
   // 画像取得用のベースURL
   const imageBaseURL = "https://image.tmdb.org/t/p/original/";
   return (
